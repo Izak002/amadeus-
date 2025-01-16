@@ -1,4 +1,5 @@
 class CartsController < ApplicationController
+  allow_unauthenticated_access only: %i[ create update destroy ]
   before_action :set_cart, only: %i[ show edit update destroy ]
   rescue_from ActiveRecord::RecordNotFound, with: :invalid_cart
   # GET /carts or /carts.json
@@ -59,7 +60,9 @@ class CartsController < ApplicationController
     end
   end
 
+  # ...
   private
+  # ...
 
     def set_cart
       @cart = Cart.find(params.expect(:id))
